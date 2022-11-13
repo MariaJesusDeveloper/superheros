@@ -15,16 +15,16 @@
             <button class="col-12 col-sm-12 col-md-2 mt-2" mat-raised-button color="primary"
                 (click)="openCreateDialog('')">Añadir</button>
             <button class="col-12 col-sm-12 col-md-2 mt-2" mat-raised-button color="accent"
-                (click)="openEditDialog(superHerosList.selectedOptions.selected[0]?.value)"
+                (click)="openEditDialog(superHerosList.selectedOptions.selected[0].value)"
                 [disabled]="!this.superHeroSelected || !selectedElement">Editar</button>
             <button class="col-12 col-sm-12 col-md-2 mt-2" mat-raised-button color="warn"
-                (click)="openDeleteDialog(superHerosList.selectedOptions.selected[0]?.value)"
+                (click)="openDeleteDialog(superHerosList.selectedOptions.selected[0].value)"
                 [disabled]="!this.superHeroSelected || !selectedElement">Borrar</button>
         </div>
         <div class="row">
             <mat-selection-list class="col-12 col-sm-12" #superHerosList [multiple]="false">
                 <mat-list-option *ngFor="let superHero of showSuperHeros" [value]="superHero"
-                    (click)="onClickSuperHero(superHerosList.selectedOptions.selected[0]?.value)">
+                    (click)="onClickSuperHero(superHerosList.selectedOptions.selected[0].value)">
                     {{superHero.name}}
                 </mat-list-option>
             </mat-selection-list>
