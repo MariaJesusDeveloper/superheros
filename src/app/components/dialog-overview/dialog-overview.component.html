@@ -1,0 +1,20 @@
+<form [formGroup]="newSuperHeroForm">
+    <h1 mat-dialog-title>{{data.matDialogTitle}}</h1>
+    <div mat-dialog-content>
+        <p *ngIf="!data.delete">Nombre del supérhéroe</p>
+        <p *ngIf="data.delete">{{data.superHeroName}}</p>
+        <mat-form-field *ngIf="!data.delete" appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput [(ngModel)]="data.superHeroName" formControlName="name" toUpperCase>
+            <mat-error *ngIf="newSuperHeroForm.get('name')?.hasError('required')">Campo obligatorio</mat-error>
+            <mat-error *ngIf="newSuperHeroForm.get('name')?.hasError('maxlength')">Número máximo de caracteres
+                {{numMaxCharactersName}}</mat-error>
+        </mat-form-field>
+        <mat-error *ngIf="data.superheroExists">El superhéroe ya existe</mat-error>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Cancelar</button>
+        <button mat-button [mat-dialog-close]="data.superHeroName"
+            [disabled]="newSuperHeroForm.get('name')?.errors">Ok</button>
+    </div>
+</form>
