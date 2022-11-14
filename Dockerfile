@@ -1,19 +1,18 @@
-#Primera Etapa
-FROM node:10-alpine as build-step
-
-RUN mkdir -p /app
+# stage 1
+FROM node:latest as node
 
 WORKDIR /app
 
-COPY package.json /app
+COPY . .
 
-RUN npm install
-
-COPY . /app
+RUN npm i 
 
 RUN npm run build --prod
 
-#Segunda Etapa
-FROM nginx:1.17.1-alpine
-	
-COPY --from=build-step /app/dist/SuperHeroApp /usr/share/nginx/html
+# stage 2
+FROM nginx:alpine
+
+RUN rm -rf /usr/share/nginx/html/*
+
+# COPY  --from=node /app/nginx/*  /etc/nginx/conf.d/default.conf
+COPY --from=node /app/dist/super-heroes /usr/share/nginx/html
